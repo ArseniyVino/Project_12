@@ -2,11 +2,9 @@ import os
 import requests
 from flask import Flask, request, render_template, jsonify
 
-# Инициализация Flask-приложения
 app = Flask(__name__)
 
-# Настройки AccuWeather API
-API_KEY = "oFOFGFLqlAh2X6feSEsRYP0R1247oCLA"  # Замените на ваш API-ключ
+API_KEY = "oFOFGFLqlAh2X6feSEsRYP0R1247oCLA" 
 BASE_URL = "http://dataservice.accuweather.com"
 
 
@@ -49,8 +47,6 @@ def get_location_key(city_name):
     else:
         return {"error": response.json()}
 
-
-# Главная страница с формой ввода
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
@@ -102,10 +98,7 @@ def index():
 
 
 if __name__ == "__main__":
-    # Создание директории для шаблонов, если её нет
     os.makedirs("templates", exist_ok=True)
-
-    # HTML-шаблон главной страницы
     with open("templates/index.html", "w", encoding="utf-8") as f:
         f.write("""<!DOCTYPE html>
 <html lang=\"en\">
@@ -117,10 +110,10 @@ if __name__ == "__main__":
 <body>
     <h1>Проверка погоды</h1>
     <form method=\"POST\">
-        <label for=\"city1\">Город 1:</label>
+        <label for=\"city1\">Город старта:</label>
         <input type=\"text\" id=\"city1\" name=\"city1\" required>
         <br>
-        <label for=\"city2\">Город 2:</label>
+        <label for=\"city2\">Город прибытия:</label>
         <input type=\"text\" id=\"city2\" name=\"city2\" required>
         <br><br>
         <button type=\"submit\">Узнать погоду</button>
